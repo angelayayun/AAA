@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roger & YaYun | 婚禮邀請函</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Cormorant Garamond & Noto Serif TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Noto+Serif+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    // 預先宣告全域表單提交旗標，防止 iframe 初始載入時出現 ReferenceError
+    window.submitted = false;
+
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            wedding: {
+              ivory: '#F0E9DE',       // 象牙白 主底色
+              retroBlue: '#35556B',   // 復古藍 主調
+              retroBlueDark: '#263E4F',
+              brickRed: '#A65B4D',    // 磚紅 點綴色
+              sandstone: '#BDA68A',   // 砂岩米 次主色/邊框
+              sandstoneLight: '#D9CBBB',
+              charcoal: '#302D2B',    // 炭黑 深邃內斂文字/重點
+              softWhite: '#FFFFFF',
+            }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', '"Noto Serif TC"', 'serif'],
+            sans: ['"Noto Serif TC"', 'sans-serif'],
+          },
+          boxShadow: {
+            'soft': '0 12px 32px -6px rgba(48, 45, 43, 0.08), 0 4px 12px -2px rgba(48, 45, 43, 0.04)',
+            'glow': '0 10px 25px rgba(166, 91, 77, 0.12)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Noto Serif TC', serif;
+      background-color: #F0E9DE;
+      color: #302D2B;
+      overflow-x: hidden;
+    }
+    
+    .font-cormorant {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* 防止手機版斷行關鍵字 */
+    .nowrap-text {
+      white-space: nowrap !important;
+      word-break: keep-all;
+    }
+
+    /* 微光卡片與浮雕質感 */
+    .glow-card {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 16px 36px -6px rgba(48, 45, 43, 0.08), 0 0 20px rgba(255, 255, 255, 0.8) inset;
+      border: 1px solid rgba(189, 166, 138, 0.35);
+    }
+
+    /* 隱藏原生 details marker */
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    /* Hero 背景圖：手機版保持現有位置，桌面版往上調整 */
+    #hero-image {
+      object-position: center 18%;
+    }
+
+    @media (min-width: 768px) {
+      #hero-image {
+        object-position: center 40%;
+      }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-wedding-brickRed/20 selection:text-wedding-charcoal">
+
+  <!-- ================= 1. 毛玻璃固定導航列 ================= -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-[#F0E9DE]/80 backdrop-blur-md border-b border-wedding-sandstone/30 transition-all duration-300">
+    <div class="max-w-5xl mx-auto px-6 h-18 py-4 flex items-center justify-between">
+      <a href="#hero" class="font-cormorant text-2xl md:text-3xl font-semibold tracking-wider text-wedding-retroBlue hover:text-wedding-brickRed transition-colors">
+        R<span class="text-wedding-brickRed mx-0.5">+</span>Y
+      </a>
+      
+      <!-- 導覽連結 -->
+      <nav class="flex items-center space-x-6 md:space-x-10 text-sm md:text-base font-medium text-wedding-charcoal/85">
+        <a href="#about" class="hover:text-wedding-brickRed transition-colors">關於我們</a>
+        <a href="#details" class="hover:text-wedding-brickRed transition-colors">婚禮資訊</a>
+        <a href="#rsvp" class="px-4 py-1.5 rounded-full border border-wedding-retroBlue text-wedding-retroBlue hover:bg-wedding-retroBlue hover:text-white transition-all duration-300 shadow-sm">出席回函</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= 封面英雄區 (全螢幕 Hero Section) ================= -->
+  <section id="hero" class="relative min-h-[92vh] md:min-h-screen flex flex-col justify-end items-center text-center px-4 overflow-hidden pt-20 pb-10 md:pb-14">
+    <!-- 背景照片層：上半部清晰明亮，精準對焦臉部構圖 -->
+    <div class="absolute inset-0 z-0">
+      <img id="hero-image" src="./picutre.png" 
+           alt="Roger and YaYun Wedding" 
+           class="w-full h-full object-cover transition-all duration-500"
+           onerror="this.src='https://placehold.co/1920x1080/35556B/F0E9DE?text=Roger+%26+YaYun'">
+      
+      <!-- 底部柔和自然漸層遮罩：上半透明透光，從 45% 處漸進過渡至深復古藍 #35556B，整體再加深一點 -->
+      <div class="absolute inset-0 pointer-events-none" 
+           style="background: linear-gradient(180deg, rgba(16,24,31,0.12) 0%, rgba(26,39,49,0.22) 24%, rgba(38,56,70,0.34) 38%, rgba(53,85,107,0.52) 52%, rgba(53,85,107,0.68) 66%, rgba(35,54,68,0.82) 82%, rgba(22,35,45,0.92) 100%);"></div>
+    </div>
+
+    <!-- 封面文案內容：整體沉澱於下方漸層區，完全避開人臉 -->
+    <div class="relative z-10 text-white max-w-3xl mx-auto px-4 mt-auto">
+      <!-- 經典副標 SAVE THE DATE -->
+      <p class="font-cormorant tracking-[0.35em] uppercase text-xs md:text-sm text-wedding-sandstoneLight font-semibold mb-2">
+        SAVE THE DATE
+      </p>
+      
+      <!-- 主新人標題 -->
+      <h1 class="font-cormorant text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-wide text-white drop-shadow-sm mb-3">
+        Roger <span class="italic text-wedding-brickRed mx-1">&</span> YaYun
+      </h1>
+
+      <!-- 溫馨邀約文字與婚期 -->
+      <p class="text-sm sm:text-base md:text-lg font-light tracking-widest text-[#F0E9DE]/95 mb-1.5 drop-shadow">
+        期待與您共享這特別的一天
+      </p>
+      <p class="font-cormorant text-sm sm:text-base md:text-lg tracking-[0.25em] text-wedding-sandstoneLight font-light">
+        APRIL 17, 2027
+      </p>
+
+      <!-- 沉穩向下捲動箭頭 -->
+      <div class="mt-6 md:mt-8">
+        <a href="#about" aria-label="向下捲動" class="inline-block animate-bounce text-white/70 hover:text-white transition-colors p-2">
+          <i class="fa-solid fa-chevron-down text-lg md:text-xl"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 2. 藝術感倒數計時器 ================= -->
+  <section class="relative -mt-16 z-20 max-w-4xl mx-auto px-4">
+    <div class="glow-card rounded-2xl md:rounded-3xl p-6 md:p-8 border border-wedding-sandstone/40 shadow-soft">
+      <div class="text-center mb-6">
+        <span class="text-xs md:text-sm font-cormorant tracking-[0.25em] text-wedding-brickRed uppercase font-semibold">Countdown to Our Day</span>
+        <h2 class="text-lg md:text-xl font-medium text-wedding-retroBlue mt-1">歡樂婚禮 倒數計時</h2>
+      </div>
+
+      <!-- 數字卡片格網 -->
+      <div class="flex items-center justify-center">
+        <!-- 天數 -->
+        <div class="flex-1 text-center py-2">
+          <div class="font-cormorant text-3xl md:text-5xl lg:text-6xl font-bold text-wedding-retroBlue" id="timer-days">--</div>
+          <div class="text-[11px] md:text-xs text-wedding-charcoal/60 uppercase tracking-widest mt-1">Days</div>
+        </div>
+
+        <div class="w-px h-12 md:h-16 bg-wedding-sandstone/40 mx-1 md:mx-4"></div>
+
+        <!-- 小時 -->
+        <div class="flex-1 text-center py-2">
+          <div class="font-cormorant text-3xl md:text-5xl lg:text-6xl font-bold text-wedding-retroBlue" id="timer-hours">--</div>
+          <div class="text-[11px] md:text-xs text-wedding-charcoal/60 uppercase tracking-widest mt-1">Hours</div>
+        </div>
+
+        <div class="w-px h-12 md:h-16 bg-wedding-sandstone/40 mx-1 md:mx-4"></div>
+
+        <!-- 分鐘 -->
+        <div class="flex-1 text-center py-2">
+          <div class="font-cormorant text-3xl md:text-5xl lg:text-6xl font-bold text-wedding-retroBlue" id="timer-minutes">--</div>
+          <div class="text-[11px] md:text-xs text-wedding-charcoal/60 uppercase tracking-widest mt-1">Mins</div>
+        </div>
+
+        <div class="w-px h-12 md:h-16 bg-wedding-sandstone/40 mx-1 md:mx-4"></div>
+
+        <!-- 秒數 (以磚紅色強調) -->
+        <div class="flex-1 text-center py-2">
+          <div class="font-cormorant text-3xl md:text-5xl lg:text-6xl font-bold text-wedding-brickRed" id="timer-seconds">--</div>
+          <div class="text-[11px] md:text-xs text-wedding-brickRed uppercase tracking-widest mt-1 font-semibold">Secs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 關於我們 (About Us) ================= -->
+  <section id="about" class="py-20 md:py-28 max-w-3xl mx-auto px-6 text-center">
+    <span class="text-xs md:text-sm font-cormorant tracking-[0.3em] text-wedding-brickRed uppercase font-semibold">Our Journey</span>
+    <h2 class="text-2xl md:text-3xl font-semibold text-wedding-retroBlue mt-2 mb-6">關於我們</h2>
+    <div class="w-10 h-0.5 bg-wedding-sandstone mx-auto mb-8"></div>
+    <p class="text-base md:text-lg leading-relaxed text-wedding-charcoal/85 font-light mb-6">
+      交往十年，<br>
+      同居七年。<br>
+      終於要結婚了，<br>
+      呵呵。<br>
+      舉辦婚禮好辛苦，來吧來吧！ <br>
+    </p>
+    <div class="font-cormorant italic text-xl md:text-2xl text-wedding-sandstone">
+      "So far, so good. Still us, just married."
+    </div>
+  </section>
+
+  <!-- ================= 3. 婚禮詳情 (垂直 V-Card 設計) ================= -->
+  <section id="details" class="py-16 bg-wedding-ivory/50 border-y border-wedding-sandstone/30">
+    <div class="max-w-2xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-12">
+        <span class="text-xs md:text-sm font-cormorant tracking-[0.3em] text-wedding-brickRed uppercase font-semibold">Wedding Details</span>
+        <h2 class="text-2xl md:text-3xl font-semibold text-wedding-retroBlue mt-1">婚禮資訊</h2>
+        <div class="w-10 h-0.5 bg-wedding-sandstone mx-auto mt-4"></div>
+      </div>
+
+      <!-- 垂直 V-Card 卡片 -->
+      <div class="glow-card rounded-3xl p-8 md:p-12 border border-wedding-sandstone/40 shadow-soft relative overflow-hidden">
+        <!-- 頂端裝飾圖章 -->
+        <div class="text-center pb-8 border-b border-wedding-sandstone/30">
+          <div class="w-16 h-16 rounded-full bg-wedding-ivory border border-wedding-sandstone flex items-center justify-center mx-auto mb-4 text-wedding-brickRed text-2xl shadow-sm">
+            <i class="fa-solid fa-wine-glass"></i>
+          </div>
+          <span class="text-xs uppercase tracking-widest text-wedding-brickRed font-semibold">The Wedding Banquet</span>
+          <h3 class="text-xl md:text-2xl font-bold text-wedding-retroBlue mt-1">誠摯邀請您蒞臨晚宴</h3>
+          <!-- 
+          <span class="text-xs uppercase tracking-widest text-wedding-brickRed font-semibold">Evening Reception</span>
+          <h3 class="text-xl md:text-2xl font-bold text-wedding-retroBlue mt-1">晚宴資訊</h3>
+          -->
+        </div>
+
+        <!-- 條目式垂直列表 -->
+        <div class="space-y-8 py-8 border-b border-wedding-sandstone/30">
+          <!-- 日期與時間 -->
+          <div class="flex items-start space-x-4">
+            <div class="w-10 h-10 rounded-full bg-wedding-retroBlue/10 flex-shrink-0 flex items-center justify-center text-wedding-retroBlue text-lg mt-1">
+              <i class="fa-regular fa-calendar-check"></i>
+            </div>
+            <div>
+              <h4 class="text-sm font-semibold tracking-wider text-wedding-retroBlue uppercase">日期與時間</h4>
+              <p class="text-lg md:text-xl font-medium text-wedding-charcoal mt-1">
+                2027 年 4 月 17 日（星期六）
+              </p>
+              <p class="text-sm md:text-base text-wedding-charcoal/75 mt-1">
+                <span class="nowrap-text font-medium text-wedding-brickRed">17:00 迎賓入場</span>
+                <span class="mx-[3px] text-wedding-sandstone">|</span>
+                <span class="nowrap-text font-medium text-wedding-charcoal">18:00 晚宴開始</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- 地點資訊 (嚴格 nowrap 防止跑版) -->
+          <div class="flex items-start space-x-4">
+            <div class="w-10 h-10 rounded-full bg-wedding-retroBlue/10 flex-shrink-0 flex items-center justify-center text-wedding-retroBlue text-lg mt-1">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="flex-1">
+              <h4 class="text-sm font-semibold tracking-wider text-wedding-retroBlue uppercase">宴會地點</h4>
+              <p class="text-lg md:text-xl font-bold text-wedding-charcoal mt-1">
+                <span class="nowrap-text">港南艾茉爾婚宴會館</span>
+              </p>
+              <p class="text-sm md:text-base text-wedding-charcoal/75 mt-1">
+                <span class="nowrap-text">新竹市海埔路588號</span>
+              </p>
+              <div class="mt-3">
+                <a href="https://maps.app.goo.gl/wzvSL5maVhY6UJ7X6" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="inline-flex items-center space-x-2 text-xs md:text-sm text-wedding-brickRed hover:text-wedding-retroBlue font-medium underline underline-offset-4 transition-colors">
+                  <i class="fa-regular fa-map"></i>
+                  <span class="nowrap-text">開啟 Google 地圖導航</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. 互動細節：交通指引摺疊式面板 (Accordion) -->
+        <div class="pt-6">
+          <details class="group bg-wedding-ivory/60 rounded-2xl border border-wedding-sandstone/40 transition-all duration-300 open:bg-wedding-ivory">
+            <summary class="flex justify-between items-center cursor-pointer p-4 md:p-5 select-none">
+              <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-car text-wedding-brickRed"></i>
+                <span class="font-medium text-wedding-retroBlue text-sm md:text-base">交通指引 (開車前往)</span>
+              </div>
+              <span class="transition-transform duration-300 group-open:rotate-180 text-wedding-charcoal/60">
+                <i class="fa-solid fa-chevron-down text-sm"></i>
+              </span>
+            </summary>
+            
+            <div class="px-5 pb-6 pt-2 border-t border-wedding-sandstone/30 text-xs md:text-sm text-wedding-charcoal/85 space-y-4">
+              <!-- 國道3號路線 -->
+              <div class="bg-white/85 p-3.5 rounded-xl border border-wedding-sandstone/30">
+                <p class="font-bold text-wedding-retroBlue mb-1.5 flex items-center">
+                  <span class="w-2 h-2 rounded-full bg-wedding-brickRed mr-2"></span>
+                  <span class="nowrap-text">國道3號 南下/北上</span>
+                </p>
+                <p class="leading-relaxed text-wedding-charcoal/80">
+                  下<span class="nowrap-text font-semibold text-wedding-charcoal">香山交流道</span>（往香山方向）接<span class="nowrap-text font-semibold text-wedding-charcoal">台61線往北</span> → 行至<span class="nowrap-text font-semibold text-wedding-charcoal">台15線77公里處</span> → 於<span class="nowrap-text font-semibold text-wedding-charcoal">海埔路左轉</span>走到底即抵達會館。
+                </p>
+              </div>
+
+              <!-- 國道1號路線 -->
+              <div class="bg-white/85 p-3.5 rounded-xl border border-wedding-sandstone/30">
+                <p class="font-bold text-wedding-retroBlue mb-1.5 flex items-center">
+                  <span class="w-2 h-2 rounded-full bg-wedding-brickRed mr-2"></span>
+                  <span class="nowrap-text">國道1號 (中山高)</span>
+                </p>
+                <p class="leading-relaxed text-wedding-charcoal/80">
+                  下<span class="nowrap-text font-semibold text-wedding-charcoal">新竹交流道</span> → 接<span class="nowrap-text font-semibold text-wedding-charcoal">台68線東西向快速道路</span>（往南寮方向） → 接<span class="nowrap-text font-semibold text-wedding-charcoal">台15線77公里處右轉</span> → 沿<span class="nowrap-text font-semibold text-wedding-charcoal">海埔路</span>走到底即抵達會館。
+                </p>
+              </div>
+            </div>
+          </details>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4. 出席回函 (表單區塊) ================= -->
+  <section id="rsvp" class="py-20 md:py-28 max-w-2xl mx-auto px-4 md:px-6">
+    <div class="text-center mb-10">
+      <span class="text-xs md:text-sm font-cormorant tracking-[0.3em] text-wedding-brickRed uppercase font-semibold">Attendance Confirmation</span>
+      <h2 class="text-2xl md:text-3xl font-semibold text-wedding-retroBlue mt-1">出席回函</h2>
+      <div class="w-10 h-0.5 bg-wedding-sandstone mx-auto mt-3"></div>
+      <!--
+      <p class="text-sm text-wedding-charcoal/70 mt-3 font-light">為了籌備最完善的宴席，請於收到邀請後協助填寫回覆。</p>
+      -->
+    </div>
+
+    <!-- 隱藏式 Iframe 技術容器 (使用嚴格監聽，防止誤觸) -->
+
+    <!-- 回函表單主體 -->
+    <div class="glow-card rounded-3xl p-6 md:p-10 border border-wedding-sandstone/40 shadow-soft relative">
+      <form id="weddingForm" 
+            action="https://script.google.com/macros/s/AKfycbxEUmWSjEZHudphtfUKjLnnTVt4mnHrNIcFxrDc3nZ5OgbVyT2rBqEf_9gQ40udFwQH/exec" 
+            method="POST" 
+            target="hidden_iframe" 
+            onsubmit="return handleSubmitForm(event);" 
+            class="space-y-6">
+
+        <!-- Google 表單必要隱藏參數，防止 Google 反垃圾機制阻擋 -->
+
+        <!-- 欄位 1: 姓名 NAME -->
+        <div>
+          <label for="entry_326328616" class="block text-xs md:text-sm font-medium text-wedding-retroBlue mb-2 tracking-wider">
+            姓名888 <span class="font-cormorant tracking-widest text-wedding-sandstone text-xs font-semibold">NAME</span> <span class="text-wedding-brickRed">*</span>
+          </label>
+          <input type="text" 
+                 id="entry_326328616" 
+                 name="entry.326328616" 
+                 value="" 
+                 required 
+                 placeholder="請輸入您的真實姓名" 
+                 class="w-full px-4 py-3 rounded-xl border border-wedding-sandstone/50 bg-white/90 text-wedding-charcoal placeholder-wedding-charcoal/30 focus:outline-none focus:ring-2 focus:ring-wedding-brickRed/40 focus:border-wedding-brickRed transition-all duration-200">
+        </div>
+
+        <!-- 欄位 2: 電子信箱 EMAIL -->
+        <div>
+          <label for="entry_300528326" class="block text-xs md:text-sm font-medium text-wedding-retroBlue mb-2 tracking-wider">
+            電子信箱 <span class="font-cormorant tracking-widest text-wedding-sandstone text-xs font-semibold">EMAIL</span> <span class="text-wedding-brickRed">*</span>
+          </label>
+          <input type="email" 
+                 id="entry_300528326" 
+                 name="entry.300528326" 
+                 value="" 
+                 required 
+                 placeholder="example@mail.com" 
+                 class="w-full px-4 py-3 rounded-xl border border-wedding-sandstone/50 bg-white/90 text-wedding-charcoal placeholder-wedding-charcoal/30 focus:outline-none focus:ring-2 focus:ring-wedding-brickRed/40 focus:border-wedding-brickRed transition-all duration-200">
+        </div>
+
+        <!-- 欄位 3: 紙本喜帖收件地址 PRINTED WEDDING INVITATION -->
+        <div>
+          <label for="entry_773929273" class="block text-xs md:text-sm font-medium text-wedding-retroBlue mb-2 tracking-wider">
+            紙本喜帖收件地址 <span class="font-cormorant tracking-widest text-wedding-sandstone text-xs font-semibold">PRINTED WEDDING INVITATION</span>
+          </label>
+          <input type="text" 
+                 id="entry_773929273" 
+                 name="entry.773929273" 
+                 value="" 
+                 placeholder="請輸入紙本喜帖收件地址" 
+                 class="w-full px-4 py-3 rounded-xl border border-wedding-sandstone/50 bg-white/90 text-wedding-charcoal placeholder-wedding-charcoal/30 focus:outline-none focus:ring-2 focus:ring-wedding-brickRed/40 focus:border-wedding-brickRed transition-all duration-200">
+        </div>
+
+        <!-- 欄位 4: 與新人的關係 RELATIONSHIP -->
+        <div>
+          <label for="entry_333244215" class="block text-xs md:text-sm font-medium text-wedding-retroBlue mb-2 tracking-wider">
+            與新人的關係 <span class="font-cormorant tracking-widest text-wedding-sandstone text-xs font-semibold">RELATIONSHIP</span> <span class="text-wedding-brickRed">*</span>
+          </label>
+          <select id="entry_333244215" 
+                  name="entry.333244215" 
+                  required 
+                  class="w-full px-4 py-3 rounded-xl border border-wedding-sandstone/50 bg-white/90 text-wedding-charcoal focus:outline-none focus:ring-2 focus:ring-wedding-brickRed/40 focus:border-wedding-brickRed transition-all duration-200">
+            <option value="" selected disabled>請選擇關係</option>
+            <option value="男方親戚">男方親戚</option>
+            <option value="女方親戚">女方親戚</option>
+            <option value="新郎同學、朋友">新郎同學、朋友</option>
+            <option value="新娘同學、朋友">新娘同學、朋友</option>
+            <option value="新郎同事">新郎同事</option>
+            <option value="新娘同事">新娘同事</option>
+            <option value="共同朋友">共同朋友</option>
+          </select>
+        </div>
+
+        <!-- 欄位 5: 參加人數 GUESTS -->
+        <div>
+          <label for="entry_1271661895" class="block text-xs md:text-sm font-medium text-wedding-retroBlue mb-2 tracking-wider">
+            參加晚宴人數 <span class="font-cormorant tracking-widest text-wedding-sandstone text-xs font-semibold">GUESTS</span> <span class="text-wedding-brickRed">*</span>
+          </label>
+          <input type="number" 
+                 id="entry_1271661895" 
+                 name="entry.1271661895" 
+                 min="0" 
+                 max="10" 
+                 value="" 
+                 required 
+                 placeholder="0 或實際出席人數" 
+                 class="w-full px-4 py-3 rounded-xl border border-wedding-sandstone/50 bg-white/90 text-wedding-charcoal placeholder-wedding-charcoal/30 focus:outline-none focus:ring-2 focus:ring-wedding-brickRed/40 focus:border-wedding-brickRed transition-all duration-200">
+          <p class="text-xs text-wedding-charcoal/50 mt-1.5">若不克出席，請填寫 0 即可</p>
+        </div>
+
+        <!-- 智能表單邏輯容器：純空白欄位 -->
+        <div id="conditionalSection" class="hidden space-y-6 pt-4 border-t border-dashed border-wedding-sandstone/50 transition-all duration-300">
+          
+          <!-- 素食人數 VEGETARIAN MEALS -->
+          <div>
+            <label for="entry_281892954" class="block text-xs md:text-sm font-medium text-wedding-retroBlue mb-2 tracking-wider">
+              素食人數 <span class="font-cormorant tracking-widest text-wedding-sandstone text-xs font-semibold">VEGETARIAN MEALS</span>
+            </label>
+            <input type="number" 
+                   id="entry_281892954" 
+                   name="entry.281892954" 
+                   min="0" 
+                   value="" 
+                   class="w-full px-4 py-3 rounded-xl border border-wedding-sandstone/50 bg-white/90 text-wedding-charcoal placeholder-wedding-charcoal/30 focus:outline-none focus:ring-2 focus:ring-wedding-brickRed/40 focus:border-wedding-brickRed transition-all duration-200">
+          </div>
+
+          <!-- 兒童椅數量 BABY CHAIR -->
+          <div>
+            <label for="entry_2001941814" class="block text-xs md:text-sm font-medium text-wedding-retroBlue mb-2 tracking-wider">
+              兒童椅數量 <span class="font-cormorant tracking-widest text-wedding-sandstone text-xs font-semibold">BABY CHAIR</span>
+            </label>
+            <input type="number" 
+                   id="entry_2001941814" 
+                   name="entry.2001941814" 
+                   min="0" 
+                   value="" 
+                   class="w-full px-4 py-3 rounded-xl border border-wedding-sandstone/50 bg-white/90 text-wedding-charcoal placeholder-wedding-charcoal/30 focus:outline-none focus:ring-2 focus:ring-wedding-brickRed/40 focus:border-wedding-brickRed transition-all duration-200">
+          </div>
+        </div>
+
+        <!-- 欄位 6: 給新人的祝福與備註 BLESSING -->
+        <div>
+          <label for="entry_1702588743" class="block text-xs md:text-sm font-medium text-wedding-retroBlue mb-2 tracking-wider">
+            給新人的祝福與備註 <span class="font-cormorant tracking-widest text-wedding-sandstone text-xs font-semibold">MESSAGE & BLESSINGS</span>
+          </label>
+          <textarea id="entry_1702588743" 
+                    name="entry.1702588743" 
+                    rows="3" 
+                    value="" 
+                    placeholder="寫下您給 Roger & YaYun 的祝福..." 
+                    class="w-full px-4 py-3 rounded-xl border border-wedding-sandstone/50 bg-white/90 text-wedding-charcoal placeholder-wedding-charcoal/30 focus:outline-none focus:ring-2 focus:ring-wedding-brickRed/40 focus:border-wedding-brickRed transition-all duration-200"></textarea>
+        </div>
+
+        <!-- 提交按鈕 -->
+        <div class="pt-2">
+          <button type="submit" 
+                  id="submitBtn" 
+                  class="w-full py-4 rounded-xl bg-wedding-charcoal hover:bg-wedding-retroBlue text-wedding-ivory font-medium text-base tracking-widest shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2">
+            <span>確認送出回函</span>
+            <i class="fa-regular fa-paper-plane text-wedding-brickRed text-sm"></i>
+          </button>
+        </div>
+      </form>
+
+      <!-- 送出成功的典雅提示彈窗 (純 CSS/DOM 顯示，取代 alert) -->
+      <div id="successCard" class="hidden absolute inset-0 bg-white/95 backdrop-blur-md rounded-3xl p-8 flex flex-col items-center justify-center text-center z-10 transition-all duration-500">
+        <div class="w-16 h-16 rounded-full bg-wedding-brickRed/10 border border-wedding-brickRed/30 flex items-center justify-center text-wedding-brickRed text-3xl mb-4">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h3 class="text-2xl font-semibold text-wedding-retroBlue mb-2">回函已成功送出</h3>
+        <p class="text-sm md:text-base text-wedding-charcoal/75 leading-relaxed max-w-sm mb-6">
+          衷心感謝您的回覆與祝福！<br>我們非常期待在 2027 年 4 月 17 日與您共度這個難忘的夜晚。
+        </p>
+        <button type="button" 
+                onclick="resetFormState()" 
+                class="px-6 py-2 rounded-full border border-wedding-sandstone text-xs text-wedding-charcoal/80 hover:text-wedding-brickRed hover:border-wedding-brickRed transition-colors">
+          修改回函資料
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 頁尾 Footer ================= -->
+  <footer class="py-12 border-t border-wedding-sandstone/30 text-center text-wedding-charcoal/60 text-xs tracking-widest bg-wedding-ivory">
+    <p class="font-cormorant text-base text-wedding-retroBlue mb-2 font-medium">Roger & YaYun • Wedding Celebration</p>
+    <p>2027.04.17 | 港南艾茉爾婚宴會館</p>
+    <p class="mt-4 text-[10px] text-wedding-charcoal/40">WITH LOVE & GRATITUDE</p>
+  </footer>
+
+  <!-- ================= 邏輯與腳本 ================= -->
+  <script>
+    // 提交狀態標記已在 head 初始化為 window.submitted = false
+
+    // --- 1. 倒數計時器邏輯 ---
+    // 目標：2027年4月17日 18:00
+    const targetDate = new Date('2027-04-17T18:00:00+08:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById('timer-days').innerText = String(days).padStart(2, '0');
+        document.getElementById('timer-hours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('timer-minutes').innerText = String(minutes).padStart(2, '0');
+        document.getElementById('timer-seconds').innerText = String(seconds).padStart(2, '0');
+      } else {
+        document.getElementById('timer-days').innerText = '00';
+        document.getElementById('timer-hours').innerText = '00';
+        document.getElementById('timer-minutes').innerText = '00';
+        document.getElementById('timer-seconds').innerText = '00';
+      }
+    }
+    
+    // 初始化並每秒更新倒數
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+
+    // --- 2. 智能表單邏輯 (出席人數 > 0 時才顯示飲食與兒童椅需求) ---
+    const guestsInput = document.getElementById('entry_1271661895');
+    const conditionalSection = document.getElementById('conditionalSection');
+
+    guestsInput.addEventListener('input', function() {
+      const count = parseInt(this.value, 10);
+      if (!isNaN(count) && count > 0) {
+        conditionalSection.classList.remove('hidden');
+      } else {
+        conditionalSection.classList.add('hidden');
+      }
+    });
+
+
+    // --- 3. 經 Apps Script 寫入及確認，避免誤報成功 ---
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxEUmWSjEZHudphtfUKjLnnTVt4mnHrNIcFxrDc3nZ5OgbVyT2rBqEf_9gQ40udFwQH/exec';
+    let pendingSubmission = null;
+    let completedSubmission = false;
+    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+    function checkSaved(requestId) {
+      return new Promise((resolve, reject) => {
+        const callback = 'rsvpCallback_' + Math.random().toString(36).slice(2);
+        const script = document.createElement('script');
+        let settled = false;
+        const cleanup = () => {
+          delete window[callback];
+          script.remove();
+          clearTimeout(timer);
+        };
+        const timer = setTimeout(() => {
+          if (!settled) { settled = true; cleanup(); reject(new Error('查詢逾時')); }
+        }, 8000);
+        window[callback] = data => {
+          if (!settled) { settled = true; cleanup(); resolve(data); }
+        };
+        script.onerror = () => {
+          if (!settled) { settled = true; cleanup(); reject(new Error('查詢失敗')); }
+        };
+        script.src = SCRIPT_URL + '?action=status&id=' + encodeURIComponent(requestId)
+          + '&callback=' + callback + '&_=' + Date.now();
+        document.head.appendChild(script);
+      });
+    }
+
+    function showResult(title, message, success) {
+      const card = document.getElementById('successCard');
+      card.querySelector('h3').textContent = title;
+      card.querySelector('p').textContent = message;
+      card.querySelector('button').textContent = success ? '再填一份回函' : '返回表單';
+      card.classList.remove('hidden');
+    }
+
+    async function handleSubmitForm(e) {
+      e.preventDefault();
+      if (window.isSubmitting || completedSubmission) return false;
+      const guests = Number(guestsInput.value);
+      const vegetarian = guests > 0 ? Number(vegCountInput.value || 0) : 0;
+      if (!Number.isInteger(guests) || guests < 0 || guests > 10 ||
+          !Number.isInteger(vegetarian) || vegetarian < 0 || vegetarian > guests) {
+        alert('請確認出席及素食人數是否正確。');
+        return false;
+      }
+      const payload = {
+        name: document.getElementById('entry_326328616').value.trim(),
+        email: document.getElementById('entry_300528326').value.trim(),
+        address: document.getElementById('entry_773929273').value.trim(),
+        relationship: document.getElementById('entry_333244215').value,
+        guests, vegetarian,
+        babyChair: guests > 0 ? Number(document.getElementById('entry_2001941814').value || 0) : 0,
+        message: document.getElementById('entry_1702588743').value.trim()
+      };
+      // 保留尚未確認的 requestId，重試時使用相同 ID，避免產生重複資料。
+      if (!pendingSubmission) {
+        pendingSubmission = { id: crypto.randomUUID(), payload };
+      } else if (JSON.stringify(payload) !== JSON.stringify(pendingSubmission.payload)) {
+        alert('上一筆資料尚未確認，請勿修改後直接重送。請先聯絡新人確認。');
+        return false;
+      }
+      const babyChairCount = Number(document.getElementById('entry_2001941814').value || 0);
+      if (!Number.isInteger(babyChairCount) || babyChairCount < 0 || babyChairCount > guests) {
+        alert('請確認兒童椅數量是否正確。'); return false;
+      }
+      const btn = document.getElementById('submitBtn');
+      window.isSubmitting = true;
+      btn.disabled = true;
+      btn.textContent = '正在確認回函是否入庫...';
+      try {
+        // 重送前先查詢，避免第一次已成功但瀏覽器未收到確認。
+        let status = await checkSaved(pendingSubmission.id).catch(() => null);
+        if (!status || !status.saved) {
+          await fetch(SCRIPT_URL, {
+            method: 'POST', mode: 'no-cors',
+            headers: {'Content-Type': 'text/plain;charset=utf-8'},
+            body: JSON.stringify({...pendingSubmission.payload, requestId: pendingSubmission.id})
+          });
+          for (let i = 0; i < 8; i++) {
+            await sleep(1200 + i * 300);
+            status = await checkSaved(pendingSubmission.id).catch(() => null);
+            if (status && status.saved) break;
+          }
+        }
+        if (status && status.saved) {
+          completedSubmission = true;
+          pendingSubmission = null;
+          showResult('回函已成功送出', '我們已確認收到您的回函，感謝您的回覆與祝福！期待在 2027 年 4 月 17 日與您相聚。', true);
+        } else {
+          showResult('尚未確認回函', '目前無法確認資料是否已儲存。請先不要重複填寫；您可以返回表單按原資料重試，或聯絡新人確認。', false);
+        }
+      } catch (err) {
+        showResult('尚未確認回函', '網路連線或資料傳送發生問題，請返回表單使用原資料重試；系統會盡量避免重複寫入。', false);
+      } finally {
+        window.isSubmitting = false;
+        btn.disabled = completedSubmission;
+        btn.innerHTML = '<span>確認送出回函</span><i class="fa-regular fa-paper-plane text-wedding-brickRed text-sm"></i>';
+      }
+      return false;
+    }
+
+    function resetFormState() {
+      document.getElementById('successCard').classList.add('hidden');
+      if (completedSubmission) {
+        document.getElementById('weddingForm').reset();
+        conditionalSection.classList.add('hidden');
+        completedSubmission = false;
+        pendingSubmission = null;
+        document.getElementById('submitBtn').disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
